@@ -1,0 +1,784 @@
+/* =========================================
+   1. CSS Variables & Design Tokens
+   ========================================= */
+   :root {
+    --clr-primary: #E05275; /* Warm Rose Pink */
+    --clr-primary-hover: #c94665;
+    --clr-secondary: #F4C430; /* Saffron Gold */
+    --clr-accent: #D96B43; /* Terracotta */
+    --clr-bg: #FFFDF9; /* Soft Cream */
+    --clr-text: #1a1a1a; /* Deep Charcoal */
+    --clr-text-light: #5a5a5a;
+    --clr-white: #FFFFFF;
+    
+    /* Dietary Badge Colors */
+    --clr-veg: #008a00;
+    --clr-nonveg: #8b0000;
+    
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    
+    --radius-soft: 16px;
+    --radius-pill: 50px;
+    
+    --shadow-soft: 0 12px 32px rgba(34, 34, 34, 0.06);
+    --shadow-hover: 0 16px 40px rgba(34, 34, 34, 0.12);
+    --shadow-header: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+/* =========================================
+   2. Reset & Base Styles
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px; /* Adjust for sticky header */
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--clr-bg);
+    color: var(--clr-text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    color: var(--clr-text);
+}
+
+a { text-decoration: none; color: inherit; }
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* =========================================
+   3. Buttons
+   ========================================= */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+    font-weight: 600;
+    border-radius: var(--radius-pill);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    font-family: var(--font-body);
+}
+
+.btn-primary {
+    background-color: var(--clr-primary);
+    color: var(--clr-white);
+    box-shadow: 0 8px 20px rgba(224, 82, 117, 0.25);
+}
+
+.btn-primary:hover {
+    background-color: var(--clr-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(224, 82, 117, 0.35);
+}
+
+.btn-secondary {
+    background-color: var(--clr-white);
+    color: var(--clr-text);
+    box-shadow: var(--shadow-soft);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--clr-primary);
+    border: 2px solid var(--clr-primary);
+    padding: 8px 24px;
+}
+
+.btn-outline:hover {
+    background-color: var(--clr-primary);
+    color: var(--clr-white);
+}
+
+.btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #25D366;                   /* Official vibrant WhatsApp Green */
+    color: #FFFFFF;                              /* High-contrast white text */
+    border: none;
+    font-size: 0.95rem;                          /* Slightly larger text */
+    font-weight: 600;
+    padding: 10px 22px;                          /* Increased padding for a fuller feel */
+    border-radius: var(--radius-pill);           /* Sleek pill shape */
+    width: auto;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3); /* Soft green glow */
+    cursor: pointer;
+}
+
+.btn-whatsapp .wa-icon {
+    width: 18px;                                 /* Larger icon size */
+    height: 18px;
+    flex-shrink: 0;
+    transition: transform 0.25s ease;
+}
+
+.btn-whatsapp:hover {
+    background-color: #1ebe57;                   /* Slightly deeper green on hover */
+    box-shadow: 0 6px 18px rgba(37, 211, 102, 0.45);
+    transform: translateY(-2px);
+}
+
+.btn-whatsapp:hover .wa-icon {
+    transform: scale(1.1);                       /* Subtle icon pop effect */
+}
+/* =========================================
+   4. Header (Navigation)
+   ========================================= */
+.app-header {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 253, 249, 0.9);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0,0,0,0.03);
+    z-index: 1000;
+    padding: 16px 0;
+    box-shadow: var(--shadow-header);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-image {
+    width: 48px;        /* Adjust size as needed */
+    height: 48px;
+    border-radius: 50%; /* Keeps it perfectly round */
+    object-fit: cover;  /* Prevents the image from stretching */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.brand-name {
+    font-size: 1.35rem;
+    color: var(--clr-text);
+    letter-spacing: -0.5px;
+}
+
+.main-nav {
+    display: none; /* Hidden on mobile, shown on desktop */
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    gap: 32px;
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--clr-text-light);
+    transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+    color: var(--clr-primary);
+}
+
+.nav-cta {
+    display: none;
+}
+
+/* =========================================
+   5. Hero Section
+   ========================================= */
+
+   .hero-section {
+    padding: 60px 0;
+    background: radial-gradient(circle at top left, rgba(224,82,117,0.08) 0%, var(--clr-bg) 70%);
+    overflow: hidden;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.hero-content {
+    text-align: left;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(244, 196, 48, 0.2);
+    color: #b38b14;
+    padding: 6px 16px;
+    border-radius: var(--radius-pill);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.hero-title {
+    font-size: 2.2rem;
+    line-height: 1.25;
+    margin-bottom: 16px;
+    color: var(--clr-text);
+}
+
+.hero-subtitle {
+    color: var(--clr-text-light);
+    font-size: 1.05rem;
+    margin-bottom: 32px;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+/* Hero Image Right Side */
+.hero-image-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.hero-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Subtle Floating Badge over Hero Image */
+.hero-floating-card {
+    position: absolute;
+    bottom: -15px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    padding: 10px 18px;
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-hover);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Media Query for Desktop Side-by-Side */
+@media (min-width: 768px) {
+    .hero-grid {
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 60px;
+    }
+    .hero-title {
+        font-size: 3.2rem;
+    }
+}
+
+/* =========================================
+   6. Trust Banner
+   ========================================= */
+.trust-banner {
+    padding: 32px 0;
+    background-color: var(--clr-white);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+}
+
+.trust-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--clr-text);
+}
+
+.trust-icon {
+    font-size: 1.2rem;
+}
+
+/* =========================================
+   7. Testimonials Section
+   ========================================= */
+.testimonials-section {
+    padding: 80px 0;
+    background-color: var(--clr-bg);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: var(--clr-text-light);
+    margin-bottom: 48px;
+}
+
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+.testimonial-card {
+    background: var(--clr-white);
+    padding: 32px;
+    border-radius: var(--radius-soft);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+.testimonial-stars {
+    color: var(--clr-secondary);
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+}
+
+.testimonial-text {
+    font-size: 1rem;
+    color: var(--clr-text);
+    font-style: italic;
+    margin-bottom: 24px;
+}
+
+.testimonial-user {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.user-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-name {
+    font-size: 1rem;
+    margin-bottom: 2px;
+}
+
+.user-dish {
+    font-size: 0.85rem;
+    color: var(--clr-primary);
+    font-weight: 500;
+}
+
+/* =========================================
+   8. Menu Section (Pills & Grid)
+   ========================================= */
+.menu-section {
+    padding: 60px 0 100px;
+    background-color: var(--clr-white);
+}
+
+.category-pills-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    padding-bottom: 16px;
+    margin-bottom: 40px;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbar */
+.category-pills-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Center the pills beautifully on Desktop and Tablets */
+@media (min-width: 768px) {
+    .category-pills-container {
+        justify-content: center;
+        flex-wrap: wrap;       /* Allows them to stack neatly if there are many categories */
+        overflow-x: visible;   /* Removes the need for scrolling on big screens */
+    }
+}
+
+.cat-pill {
+    background-color: var(--clr-bg);
+    border: 1px solid rgba(0,0,0,0.08);
+    color: var(--clr-text-light);
+    padding: 12px 28px;
+    border-radius: var(--radius-pill);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.cat-pill.active {
+    background-color: var(--clr-primary);
+    color: var(--clr-white);
+    border-color: var(--clr-primary);
+    box-shadow: 0 4px 12px rgba(224, 82, 117, 0.2);
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   9. Menu Card UI
+   ========================================= */
+.menu-card {
+    background-color: var(--clr-white);
+    border-radius: var(--radius-soft);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card-img-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+}
+
+.card-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.menu-card:hover .card-img-wrap img {
+    transform: scale(1.05);
+}
+
+.card-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    flex-grow: 1;
+}
+
+/* Strict Indian Dietary Badges */
+.diet-badge {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 18px;
+    height: 18px;
+    border: 2px solid;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 6px;
+}
+
+.diet-badge::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.diet-veg { border-color: var(--clr-veg); }
+.diet-veg::after { background-color: var(--clr-veg); }
+
+.diet-nonveg { border-color: var(--clr-nonveg); }
+.diet-nonveg::after { background-color: var(--clr-nonveg); }
+
+.card-desc {
+    color: var(--clr-text-light);
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+    flex-grow: 1;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.card-price {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--clr-text);
+}
+
+/* =========================================
+   10. Premium Footer
+   ========================================= */
+   .app-footer {
+    background-color: #24181A; /* Warm deep charcoal */
+    color: rgba(255, 255, 255, 0.85);
+    padding: 80px 0 24px;
+    position: relative;
+    border-top: 4px solid var(--clr-primary);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    margin-bottom: 60px;
+}
+
+/* Brand Column */
+.footer-logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.footer-logo {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.footer-logo-wrap h3 {
+    color: var(--clr-white);
+    font-size: 1.6rem;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.footer-desc {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #b8abae; /* Soft rose-grey for readability */
+    max-width: 320px;
+}
+
+/* Footer Headings */
+.footer-heading {
+    color: var(--clr-white);
+    font-size: 1.25rem;
+    margin-bottom: 24px;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-heading::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 40px;
+    height: 3px;
+    background-color: var(--clr-primary);
+    border-radius: 2px;
+}
+
+/* Contact List */
+.footer-contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.footer-contact-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.footer-icon {
+    font-size: 1.2rem;
+    line-height: 1.2;
+}
+
+.footer-contact-list strong {
+    color: var(--clr-white);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* Google Maps Button */
+.btn-map {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--clr-white);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-map:hover {
+    background: var(--clr-primary);
+    border-color: var(--clr-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(224, 82, 117, 0.3);
+}
+
+/* Premium FSSAI Plaque */
+.fssai-box {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: inline-block;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.fssai-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.fssai-logo {
+    font-weight: 800;
+    color: var(--clr-secondary);
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+}
+
+.fssai-box p {
+    margin: 0 0 6px 0;
+    font-size: 1rem;
+    color: var(--clr-white);
+    font-family: var(--font-heading);
+    letter-spacing: 0.5px;
+}
+
+.fssai-text {
+    font-size: 0.9rem !important;
+    color: #25D366 !important; /* Bright green trust signal */
+    font-weight: 500;
+    margin-top: 8px !important;
+}
+
+/* Bottom Bar */
+.footer-bottom {
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.9rem;
+    color: #b8abae;
+}
+
+@media (min-width: 768px) {
+    .footer-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+    }
+}
+
+/* =========================================
+   11. Media Queries (Desktop Support)
+   ========================================= */
+@media (min-width: 768px) {
+    .menu-grid, .testimonial-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .hero-title {
+        font-size: 3.5rem;
+    }
+    .footer-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .main-nav, .nav-cta {
+        display: block;
+    }
+    .menu-grid, .testimonial-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .nav-cta {
+        display: inline-flex;
+    }
+}
